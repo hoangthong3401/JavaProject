@@ -41,12 +41,46 @@ public class BigNumber {
     //Substraction the value to the left with the right.
     public String sub(String a, String b) {
         String result = "";
-        return result;
+        if (tool.compare(a, b) == 0) {
+            return result + "0";
+        } else if (tool.check(a) && !tool.check(b)) {
+            return add(a, b.substring(1));
+        } else if (!tool.check(a) && tool.check(b)) {
+            return "-" + add(a.substring(1), b);
+        } else if (!tool.check(a) && !tool.check(b)) {
+            return sub(b.substring(1), a.substring(1));
+        } else {
+            if (tool.compare(a, b) == -1) {
+                return "-" + sub(b, a);
+            } else {
+                if (a.length() >= b.length()) {
+                    b = tool.insert(b, a.length() - b.length());
+                } else {
+                    a = tool.insert(a, b.length() - a.length());
+                }
+                int r = 0;
+                for (int i = a.length() - 1; i >= 0; i--) {
+                    if (i == 0) {
+                        result = tool.getValueAt(a, 0) - tool.getValueAt(b, 0) - r + result;
+                        break;
+                    }
+                    if (tool.getValueAt(a, i) - tool.getValueAt(b, i) - r < 0) {
+                        result = tool.getValueAt(a, i) - tool.getValueAt(b, i) - r + 10 + result;
+                        r = 1;
+                    } else {
+                        result = tool.getValueAt(a, i) - tool.getValueAt(b, i) - r + result;
+                        r = 0;
+                    }
+                }
+            }
+        }
+        return tool.trim(result);
     }
 
     //Multiply the value to the left with the right.
     public String mul(String a, String b) {
         String result = "";
+
         return result;
     }
 
@@ -94,8 +128,6 @@ public class BigNumber {
             return parameter;
         }
 
-        /*Compare two numbers of type String, return 1 if a is greater than b, 
-        equally returns 0, and -1 for the remaining cases.*/
         public int compare(String a, String b) {
             a = trim(a);
             b = trim(b);
@@ -109,7 +141,11 @@ public class BigNumber {
                 return -1;
             }
             if (!check(a) && !check(b)) {
-                return compare(a.substring(1), b.substring(1));
+                if (compare(a.substring(1), b.substring(1)) == 1) {
+                    return -1;
+                } else {
+                    return 1;
+                }
             }
             if (a.length() > b.length()) {
                 return 1;
@@ -121,11 +157,13 @@ public class BigNumber {
                 if (getValueAt(a, i) > getValueAt(b, i)) {
                     return 1;
                 }
+                if (getValueAt(a, i) < getValueAt(b, i)) {
+                    return -1;
+                }
             }
-            return -1;
+            return 0;
         }
 
-        //This method returns the Integer located at the String's specified index.
         public int getValueAt(String parameter, int index) {
             return Character.getNumericValue(parameter.charAt(index));
         }
@@ -139,13 +177,12 @@ public class BigNumber {
             }
         }
 
-        //Random number, return a string
-        public String randomNumber(int amount, boolean np) {
+        public String randomNumber(int amount, boolean length) {
             String result = "";
             Random ran = new Random();
             for (int i = 0; i < amount; i++) {
                 if (i == 0) {
-                    if (np) {
+                    if (length) {
                         int ra = ran.nextInt(2);
                         if (ra == 1) {
                             result = "-" + result;
