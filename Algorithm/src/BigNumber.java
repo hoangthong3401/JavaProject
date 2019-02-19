@@ -86,7 +86,24 @@ public class BigNumber {
 
     //Multiply the value to the left with the right value.
     public String mul(String a, int b) {
-        String result = "";
+        String result = null;
+        if (tool.check(a) && b > 0 && b <= 9) {
+            result = "";
+            int r = 0;
+            for (int i = a.length() - 1; i >= 0; i--) {
+                if (i == 0) {
+                    result = tool.getValueAt(a, 0) * b + r + result;
+                    break;
+                }
+                if (tool.getValueAt(a, i) * b + r <= 9) {
+                    result = tool.getValueAt(a, i) * b + r + result;
+                    r = 0;
+                } else {
+                    result = (tool.getValueAt(a, i) * b + r) % 10 + result;
+                    r = (tool.getValueAt(a, i) * b + r) / 10;
+                }
+            }
+        }
         return result;
     }
 
