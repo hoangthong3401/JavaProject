@@ -79,9 +79,25 @@ public class BigNumber {
 
     //Multiply the value to the left with the right.
     public String mul(String a, String b) {
-        String result = "";
-
-        return result;
+        if (a.length() > b.length()) {
+            return mul(b, a);
+        }
+        if (!tool.check(a) && !tool.check(b)) {
+            return mul(a.substring(1), b.substring(1));
+        } else if (!tool.check(a) && tool.check(b)) {
+            return "-" + mul(a.substring(1), b);
+        } else if (tool.check(a) && !tool.check(b)) {
+            return "-" + mul(a, b.substring(1));
+        }
+        String[] sigma = new String[a.length()];
+        for (int i = a.length() - 1; i >= 0; i--) {
+            if (mul(b, tool.getValueAt(a, i)) != null) {
+                sigma[i] = tool.pow(mul(b, tool.getValueAt(a, i)), a.length() - i - 1);
+            } else {
+                sigma[i] = "0";
+            }
+        }
+        return tool.sigma(sigma);
     }
 
     //Multiply the value to the left with the right value.
@@ -103,6 +119,8 @@ public class BigNumber {
                     r = (tool.getValueAt(a, i) * b + r) / 10;
                 }
             }
+        } else if (!tool.check(a) && b > 0 && b <= 9) {
+            return "-" + mul(a.substring(1), b);
         }
         return result;
     }
@@ -212,5 +230,19 @@ public class BigNumber {
             return trim(result);
         }
 
+        public String pow(String base, int exponenet) {
+            for (int i = 0; i < exponenet; i++) {
+                base += "0";
+            }
+            return base;
+        }
+
+        public String sigma(String[] sigma) {
+            String result = "0";
+            for (String string : sigma) {
+                result = add(result, string);
+            }
+            return result;
+        }
     }
 }

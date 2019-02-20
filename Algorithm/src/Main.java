@@ -7,9 +7,10 @@ public class Main {
         BigNumber.Tool obj = new BigNumber().new Tool();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a, b: ");
-        String a = sc.nextLine();
-        int b = sc.nextInt();
-        sc.nextLine();
+        String a = obj.randomNumber(32, true);
+        String b = obj.randomNumber(32, true);
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
         sc.close();
         System.out.println("Result: " + new BigNumber().mul(a, b));
     }
