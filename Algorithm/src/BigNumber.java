@@ -128,30 +128,7 @@ public class BigNumber {
     //Divides left-hand operand by right-hand operand.
     public String div(String a, String b) {
         String result = "";
-        int j;
-        while (true) {
-            if (tool.compare(a, b) == -1) {
-                break;
-            }
-            j = b.length();
-            if (tool.compare(a.substring(0, j), b) == -1) {
-                j++;
-            }
-            for (int i = 1; i < 11; i++) {
-                if (tool.compare(a.substring(0, j), mul(b, Integer.toString(i))) == -1) {
-                    System.out.println("mul(b,i) = " + mul(b, i));
-                    i--;
-                    result += i;
-                    a = sub(a.substring(0, j), mul(b, i)).concat(a.substring(j));
-                    //TEst
-                    System.out.println("a.substring(0,j) = " + a.substring(0, j));
-                    System.out.println("a = " + a);
-                    System.out.println("b = " + b);
-                    System.out.println("result = " + result);
-                    break;
-                }
-            }
-        }
+
         return result;
     }
 
