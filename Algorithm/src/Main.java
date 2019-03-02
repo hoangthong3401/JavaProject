@@ -11,7 +11,7 @@ public class Main {
         String b = sc.nextLine();
         sc.close();
 //        System.out.println("a: " + a.substring(0, b.length()));
-//        System.out.println("Result: " + new BigNumber().div(a, b));
+        System.out.println("Result: " + new BigNumber().div(a, b));
 //        System.out.println("Result: " + new BigNumber().sub(a, b));
     }
 }
