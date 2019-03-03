@@ -11,14 +11,15 @@ public class Main {
         String a = sc.nextLine();
         System.out.print("Enter b: ");
         String b = sc.nextLine();
-        System.out.print("Enter result (check): ");
-        String test = sc.nextLine();
-        sc.close();
-        if (test.equals(new BigNumber().div(a, b))) {
-            System.out.println("true");
-        } else {
-            System.out.println("false");
-        }
+//        System.out.print("Enter result (check): ");
+//        String test = sc.nextLine();
+//        sc.close();
+//        if (test.equals(new BigNumber().div(a, b))) {
+//            System.out.println("true");
+//        } else {
+//            System.out.println("false");
+//        }
         System.out.println("div(a,b) = " + new BigNumber().div(a, b));
+        System.out.println("mod(a,b) = " + new BigNumber().mod(a, b));
     }
 }

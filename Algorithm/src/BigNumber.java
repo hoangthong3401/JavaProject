@@ -136,7 +136,7 @@ public class BigNumber {
             a1 = a.substring(0, b.length());
             a2 = a.substring(b.length());
         }
-        while (!a2.equals("")) {
+        do {
             for (int i = 1; i <= 10; i++) {
                 if (tool.compare(a1, mul(b, Integer.toString(i))) == -1) {
                     i--;
@@ -162,7 +162,7 @@ public class BigNumber {
                     }
                 }
             }
-        }
+        } while (!a2.equals(""));
         return result;
     }
 
