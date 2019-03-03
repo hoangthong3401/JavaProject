@@ -136,9 +136,7 @@ public class BigNumber {
             a1 = a.substring(0, b.length());
             a2 = a.substring(b.length());
         }
-        System.out.println("a1 = " + a1);
-        System.out.println("a2 = " + a2);
-        while (tool.compare(a1, b) != -1 && !a2.equals("")) {
+        while (!a2.equals("")) {
             for (int i = 1; i <= 10; i++) {
                 if (tool.compare(a1, mul(b, Integer.toString(i))) == -1) {
                     i--;
@@ -146,16 +144,20 @@ public class BigNumber {
                     if (a2.length() > 1) {
                         a1 = sub(a1, mul(b, Integer.toString(i))) + a2.substring(0, 1);
                         a2 = a2.substring(1);
-                        System.out.println("a1 = " + a1);
-                        System.out.println("a2 = " + a2);
-                        System.out.println("result = " + result);
                         break;
                     } else {
                         a1 = sub(a1, mul(b, Integer.toString(i))).concat(a2);
                         a2 = "";
-                        System.out.println("a1 = " + a1);
-                        System.out.println("a2 = " + a2);
-                        System.out.println("result = " + result);
+                        break;
+                    }
+                }
+            }
+            if (a2.equals("")) {
+                for (int i = 1; i <= 10; i++) {
+                    if (tool.compare(a1, mul(b, Integer.toString(i))) == -1) {
+                        i--;
+                        result += i;
+                        a1 = sub(a1, mul(b, Integer.toString(i)));
                         break;
                     }
                 }
