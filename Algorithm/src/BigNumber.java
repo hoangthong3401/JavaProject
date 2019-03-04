@@ -139,19 +139,21 @@ public class BigNumber {
         while (!a2.equals("")) {
             if (a2.length() == 1) {
                 result += divInt(a1, b);
+//                System.out.println("a1 = " + a1);
+//                System.out.println("b = " + b);
+//                System.out.println("a2 = " + a2);
+//                System.out.println("result = " + result);
                 a1 = sub(a1, mul(b, Integer.toString(divInt(a1, b)))) + a2;
                 a2 = "";
-                System.out.println("a1 = " + a1);
-                System.out.println("a2 = " + a2);
-                System.out.println("result = " + result);
                 break;
             }
             result += divInt(a1, b);
+//            System.out.println("a1 = " + a1);
+//            System.out.println("b = " + b);
+//            System.out.println("a2 = " + a2);
+//            System.out.println("result = " + result);
             a1 = sub(a1, mul(b, Integer.toString(divInt(a1, b)))) + a2.substring(0, 1);
             a2 = a2.substring(1);
-            System.out.println("a1 = " + a1);
-            System.out.println("a2 = " + a2);
-            System.out.println("result = " + result);
         }
         result += divInt(a1, b);
         return result;
@@ -164,7 +166,7 @@ public class BigNumber {
         } else if (tool.compare(a, b) == 0) {
             return 1;
         }
-        for (i = 2; i < 10; i++) {
+        for (i = 2; i <= 10; i++) {
             if (tool.compare(a, mul(b, Integer.toString(i))) == -1) {
                 i--;
                 return i;

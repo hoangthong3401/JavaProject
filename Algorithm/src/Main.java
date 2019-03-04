@@ -13,22 +13,22 @@ public class Main {
         String b = obj.randomNumber(8, false);
         System.out.println("a = " + a);
         System.out.println("b = " + b);
-//        System.out.print("Enter result (check div): ");
-//        String testDiv = sc.nextLine();
-//        System.out.print("Enter result (check div): ");
-//        String testMod = sc.nextLine();
-//        sc.close();
-//        if (testDiv.equals(new BigNumber().div(a, b))) {
-//            System.out.println("true div");
-//        } else {
-//            System.out.println("false div");
-//        }
-//        if (testMod.equals(new BigNumber().mod(a, b))) {
-//            System.out.println("true mod");
-//        } else {
-//            System.out.println("false mod");
-//        }
+        System.out.print("Enter result (check div): ");
+        String testDiv = sc.nextLine();
+        System.out.print("Enter result (check div): ");
+        String testMod = sc.nextLine();
+        sc.close();
+        if (testDiv.equals(new BigNumber().div(a, b))) {
+            System.out.println("true div");
+        } else {
+            System.out.println("false div");
+        }
+        if (testMod.equals(new BigNumber().mod(a, b))) {
+            System.out.println("true mod");
+        } else {
+            System.out.println("false mod");
+        }
         System.out.println("div(a,b) = " + new BigNumber().div(a, b));
-//        System.out.println("mod(a,b) = " + new BigNumber().mod(a, b));
+        System.out.println("mod(a,b) = " + new BigNumber().mod(a, b));
     }
 }
