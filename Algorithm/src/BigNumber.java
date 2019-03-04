@@ -136,40 +136,64 @@ public class BigNumber {
             a1 = a.substring(0, b.length());
             a2 = a.substring(b.length());
         }
-        do {
-            for (int i = 1; i <= 10; i++) {
-                if (tool.compare(a1, mul(b, Integer.toString(i))) == -1) {
-                    i--;
-                    result += i;
-                    if (a2.length() > 1) {
-                        a1 = sub(a1, mul(b, Integer.toString(i))) + a2.substring(0, 1);
-                        a2 = a2.substring(1);
-                        break;
-                    } else {
-                        a1 = sub(a1, mul(b, Integer.toString(i))).concat(a2);
-                        a2 = "";
-                        break;
-                    }
-                }
+        while (!a2.equals("")) {
+            if (a2.length() == 1) {
+                result += divInt(a1, b);
+                a1 = sub(a1, mul(b, Integer.toString(divInt(a1, b)))) + a2;
+                a2 = "";
+                System.out.println("a1 = " + a1);
+                System.out.println("a2 = " + a2);
+                System.out.println("result = " + result);
+                break;
             }
-            if (a2.equals("")) {
-                for (int i = 1; i <= 10; i++) {
-                    if (tool.compare(a1, mul(b, Integer.toString(i))) == -1) {
-                        i--;
-                        result += i;
-                        a1 = sub(a1, mul(b, Integer.toString(i)));
-                        break;
-                    }
-                }
-            }
-        } while (!a2.equals(""));
+            result += divInt(a1, b);
+            a1 = sub(a1, mul(b, Integer.toString(divInt(a1, b)))) + a2.substring(0, 1);
+            a2 = a2.substring(1);
+            System.out.println("a1 = " + a1);
+            System.out.println("a2 = " + a2);
+            System.out.println("result = " + result);
+        }
+        result += divInt(a1, b);
         return result;
+    }
+
+    public int divInt(String a, String b) {
+        int i;
+        if (tool.compare(a, b) == -1) {
+            return 0;
+        } else if (tool.compare(a, b) == 0) {
+            return 1;
+        }
+        for (i = 2; i < 10; i++) {
+            if (tool.compare(a, mul(b, Integer.toString(i))) == -1) {
+                i--;
+                return i;
+            }
+        }
+        return i;
     }
 
     //Divides left-hand operand by right-hand operand and returns remainder.
     public String mod(String a, String b) {
-        String result = "";
-        return result;
+        String a1, a2;
+        if (tool.compare(a.substring(0, b.length()), b) == -1) {
+            a1 = a.substring(0, b.length() + 1);
+            a2 = a.substring(b.length() + 1);
+        } else {
+            a1 = a.substring(0, b.length());
+            a2 = a.substring(b.length());
+        }
+        while (!a2.equals("")) {
+            if (a2.length() == 1) {
+                a1 = sub(a1, mul(b, Integer.toString(divInt(a1, b)))) + a2;
+                a2 = "";
+                break;
+            }
+            a1 = sub(a1, mul(b, Integer.toString(divInt(a1, b)))) + a2.substring(0, 1);
+            a2 = a2.substring(1);
+        }
+        a1 = sub(a1, mul(b, Integer.toString(divInt(a1, b)))) + a2;
+        return a1;
     }
 
     class Tool {
