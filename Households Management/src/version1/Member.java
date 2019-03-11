@@ -48,33 +48,37 @@ public class Member implements iMember {
 
     @Override
     public String toString() {
-        return "Member{" + "fullName=" + fullName + ", occupation=" + occupation + ", dob=" + dob + '}';
+        Calendar c = Calendar.getInstance();
+        c.setTime(dob);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        return "Member{" + "fullName=" + fullName + ", occupation=" + occupation + ", dob=" + sdf.format(dob) + '}';
     }
 
     @Override
     public void inputInfo() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Full name? - ");
-        this.fullName = sc.nextLine();
-        System.out.print("Occupation? - ");
-        this.occupation = sc.nextLine();
-        System.out.print("Date of birth(dd/mm/yyyy)? - ");
-        String dobString = sc.nextLine();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        try {
-            this.dob = sdf.parse(dobString);
-        } catch (ParseException ex) {
-            this.dob = null;
-        }
-        while (dob == null) {
-            System.out.print("Date of birth? - ");
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Full name? - ");
+            this.fullName = sc.nextLine();
+            System.out.print("Occupation? - ");
+            this.occupation = sc.nextLine();
+            System.out.print("Date of birth(dd/mm/yyyy)? - ");
+            String dobString = sc.nextLine();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
             try {
                 this.dob = sdf.parse(dobString);
             } catch (ParseException ex) {
                 this.dob = null;
             }
+            while (dob == null) {
+                System.out.print("Date of birth? - ");
+                dobString = sc.nextLine();
+                try {
+                    this.dob = sdf.parse(dobString);
+                } catch (ParseException ex) {
+                    this.dob = null;
+                }
+            }
         }
-        sc.close();
     }
 
     @Override

@@ -6,20 +6,12 @@ import java.util.Scanner;
 public class Household implements iHousehold {
 
     private int nMembers;
-    private String houseNumber;
+    private final String HOUSE_NUMBER;
     private List<Member> lsMembers;
 
-    public Household() {
-
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public Household(int nMembers, String houseNumber, List<Member> lsMembers) {
-        super();
-        this.nMembers = nMembers;
+    public Household(String houseNumber, List<Member> lsMembers) {
+        this.HOUSE_NUMBER = houseNumber;
+        this.nMembers = lsMembers.size();
         this.lsMembers = lsMembers;
     }
 
@@ -27,12 +19,8 @@ public class Household implements iHousehold {
         return nMembers;
     }
 
-    public void setnMembers(int nMembers) {
-        this.nMembers = nMembers;
-    }
-
     public String getHouseNumber() {
-        return houseNumber;
+        return HOUSE_NUMBER;
     }
 
     public List<Member> getLsMembers() {
@@ -45,7 +33,7 @@ public class Household implements iHousehold {
 
     @Override
     public String toString() {
-        return "Household{" + "nMembers=" + nMembers + ", houseNumber=" + houseNumber + '}';
+        return "Household{" + "nMembers=" + nMembers + ", houseNumber=" + HOUSE_NUMBER + '}';
     }
 
     @Override
@@ -61,8 +49,8 @@ public class Household implements iHousehold {
 
     @Override
     public void find() {
-        lsMembers.forEach((Member member) -> {
-            if (member.isMoreThan80YearOld()) {
+        lsMembers.stream().forEach((Member t) -> {
+            if (t.isMoreThan80YearOld()) {
                 System.out.println(Household.this.toString());
             }
         });
