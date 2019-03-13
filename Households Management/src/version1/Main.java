@@ -43,8 +43,23 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        manage.showInforamation();
-        manage.add();
-        manage.showInforamation();
+        while (true) {
+            System.out.print("> ");
+            int i = new Scanner(System.in).nextInt();
+            switch (i) {
+                case 1:
+                    break;
+                case 2:
+                    manage.showInforamation();
+                    break;
+                case 3:
+                    manage.add();
+                    break;
+                case 5:
+                    System.exit(0);
+                default:
+                    System.out.println("The command is valid.");
+            }
+        }
     }
 }

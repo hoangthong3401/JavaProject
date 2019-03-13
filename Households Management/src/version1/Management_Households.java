@@ -35,7 +35,6 @@ public class Management_Households implements iManagement_Household {
         Household h = new Household(ID, new ArrayList<>());
         h.input();
         lsHouseholds.put(ID, h);
-        System.out.println("this");
     }
 
     @Override
