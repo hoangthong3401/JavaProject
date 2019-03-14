@@ -5,18 +5,18 @@ import java.util.Scanner;
 
 public class Household implements iHousehold {
 
-    private int nMembers;
+    private final int N_MEMBERS;
     private final String HOUSE_NUMBER;
     private List<Member> lsMembers;
 
     public Household(String houseNumber, List<Member> lsMembers) {
         this.HOUSE_NUMBER = houseNumber;
-        this.nMembers = lsMembers.size();
+        this.N_MEMBERS = lsMembers.size();
         this.lsMembers = lsMembers;
     }
 
-    public int getnMembers() {
-        return nMembers;
+    public int getN_MEMBERS() {
+        return N_MEMBERS;
     }
 
     public String getHouseNumber() {
@@ -33,7 +33,7 @@ public class Household implements iHousehold {
 
     @Override
     public String toString() {
-        return "Household{" + "nMembers=" + nMembers + ", houseNumber=" + HOUSE_NUMBER + '}';
+        return "Household{" + "N_MEMBERS=" + N_MEMBERS + ", houseNumber=" + HOUSE_NUMBER + '}';
     }
 
     @Override
