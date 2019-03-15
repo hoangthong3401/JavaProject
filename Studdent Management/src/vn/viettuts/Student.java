@@ -2,23 +2,18 @@ package vn.viettuts;
 
 import java.io.Serializable;
 
-/**
- * Student class
- * 
- * @author viettuts.vn
- */
 public class Student implements Serializable {
+
     private int id;
     private String name;
     private byte age;
     private String address;
-    /* điểm trung bình của sinh viên */
     private float gpa;
 
     public Student() {
     }
 
-    public Student(int id, String name, byte age, 
+    public Student(int id, String name, byte age,
             String address, float gpa) {
         super();
         this.id = id;

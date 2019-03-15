@@ -12,17 +12,13 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * StudentDao class
- * 
- * @author viettuts.vn
- */
 public class StudentDao {
+
     private static final String STUDENT_FILE_NAME = "student.txt";
 
     /**
      * save list student to file
-     * 
+     *
      * @param studentList: list student to save
      */
     public void write(List<Student> studentList) {
@@ -33,9 +29,7 @@ public class StudentDao {
             oos = new ObjectOutputStream(fos);
             oos.writeObject(studentList);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             closeStream(oos);
         }
@@ -43,7 +37,7 @@ public class StudentDao {
 
     /**
      * read list student from file
-     * 
+     *
      * @return list student
      */
     public List<Student> read() {
@@ -55,11 +49,7 @@ public class StudentDao {
             ois = new ObjectInputStream(fis);
             studentList = (List<Student>) ois.readObject();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
         } finally {
             closeStream(fis);
             closeStream(ois);
@@ -69,7 +59,7 @@ public class StudentDao {
 
     /**
      * close input stream
-     * 
+     *
      * @param is: input stream
      */
     private void closeStream(InputStream is) {
@@ -77,14 +67,13 @@ public class StudentDao {
             try {
                 is.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
 
     /**
      * close output stream
-     * 
+     *
      * @param os: output stream
      */
     private void closeStream(OutputStream os) {
@@ -92,7 +81,6 @@ public class StudentDao {
             try {
                 os.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }

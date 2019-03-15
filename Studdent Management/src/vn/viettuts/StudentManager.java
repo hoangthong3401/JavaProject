@@ -4,25 +4,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * StudentManager class
- * 
- * @author viettuts.vn
- */
 public class StudentManager {
+
     public static Scanner scanner = new Scanner(System.in);
     private List<Student> studentList;
-    private StudentDao studentDao;
+    private final StudentDao STUDENT_DAO;
 
     public StudentManager() {
-        studentDao = new StudentDao();
-        studentList = studentDao.read();
+        STUDENT_DAO = new StudentDao();
+        studentList = STUDENT_DAO.read();
     }
 
     /**
      * add student to studentList
-     * 
-     * @param student
+     *
      */
     public void add() {
         int id = (studentList.size() > 0) ? (studentList.size() + 1) : 1;
@@ -33,12 +28,12 @@ public class StudentManager {
         float gpa = inputGpa();
         Student student = new Student(id, name, age, address, gpa);
         studentList.add(student);
-        studentDao.write(studentList);
+        STUDENT_DAO.write(studentList);
     }
 
     /**
      * edit student by id
-     * 
+     *
      * @param id
      */
     public void edit(int id) {
@@ -57,13 +52,13 @@ public class StudentManager {
         if (!isExisted) {
             System.out.printf("id = %d not existed.\n", id);
         } else {
-            studentDao.write(studentList);
+            STUDENT_DAO.write(studentList);
         }
     }
 
     /**
      * delete student by id
-     * 
+     *
      * @param id: student id
      */
     public void delete(int id) {
@@ -77,7 +72,7 @@ public class StudentManager {
         }
         if (student != null) {
             studentList.remove(student);
-            studentDao.write(studentList);
+            STUDENT_DAO.write(studentList);
         } else {
             System.out.printf("id = %d not existed.\n", id);
         }
@@ -101,18 +96,35 @@ public class StudentManager {
      * show list student to screen
      */
     public void show() {
-        for (Student student : studentList) {
+        //Modern way:
+        studentList.stream().map((student) -> {
             System.out.format("%5d | ", student.getId());
+            return student;
+        }).map((student) -> {
             System.out.format("%20s | ", student.getName());
+            return student;
+        }).map((student) -> {
             System.out.format("%5d | ", student.getAge());
+            return student;
+        }).map((student) -> {
             System.out.format("%20s | ", student.getAddress());
+            return student;
+        }).forEachOrdered((student) -> {
             System.out.format("%10.1f%n", student.getGpa());
-        }
+        });
+//      Traditional way:
+//        for (Student student : studentList) {
+//            System.out.format("%5d | ", student.getId());
+//            System.out.format("%20s | ", student.getName());
+//            System.out.format("%5d | ", student.getAge());
+//            System.out.format("%20s | ", student.getAddress());
+//            System.out.format("%10.1f%n", student.getGpa());
+//        }
     }
 
     /**
      * input student id
-     * 
+     *
      * @return student id
      */
     public int inputId() {
@@ -126,10 +138,10 @@ public class StudentManager {
             }
         }
     }
-    
+
     /**
      * input student name
-     * 
+     *
      * @return student name
      */
     private String inputName() {
@@ -139,7 +151,7 @@ public class StudentManager {
 
     /**
      * input student address
-     * 
+     *
      * @return student address
      */
     private String inputAddress() {
@@ -149,7 +161,7 @@ public class StudentManager {
 
     /**
      * input student age
-     * 
+     *
      * @return student age
      */
     private byte inputAge() {
@@ -169,7 +181,7 @@ public class StudentManager {
 
     /**
      * input student gpa
-     * 
+     *
      * @return gpa
      */
     private float inputGpa() {
