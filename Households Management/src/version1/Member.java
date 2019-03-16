@@ -1,5 +1,6 @@
 package version1;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
@@ -7,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Member implements iMember {
+public class Member implements iMember, Serializable {
 
     private String fullName;
     private String occupation;
@@ -51,32 +52,32 @@ public class Member implements iMember {
         Calendar c = Calendar.getInstance();
         c.setTime(dob);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-        return "Member{" + "fullName=" + fullName + ", occupation=" + occupation + ", dob=" + sdf.format(dob) + '}';
+        return "Member{" + "Full name is " + fullName
+                + ", Occupation is " + occupation
+                + ", Birthday is =" + sdf.format(dob) + '}';
     }
 
     @Override
     public void inputInfo() {
-        try (Scanner sc = new Scanner(System.in)) {
-            System.out.print("Full name? - ");
-            this.fullName = sc.nextLine();
-            System.out.print("Occupation? - ");
-            this.occupation = sc.nextLine();
-            System.out.print("Date of birth(dd/mm/yyyy)? - ");
-            String dobString = sc.nextLine();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        System.out.print("Full name? - ");
+        this.fullName = new Scanner(System.in).nextLine();
+        System.out.print("Occupation? - ");
+        this.occupation = new Scanner(System.in).nextLine();
+        System.out.print("Date of birth(dd/mm/yyyy)? - ");
+        String dobString = new Scanner(System.in).nextLine();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        try {
+            this.dob = sdf.parse(dobString);
+        } catch (ParseException ex) {
+            this.dob = null;
+        }
+        while (dob == null) {
+            System.out.print("Date of birth? - ");
+            dobString = new Scanner(System.in).nextLine();
             try {
                 this.dob = sdf.parse(dobString);
             } catch (ParseException ex) {
                 this.dob = null;
-            }
-            while (dob == null) {
-                System.out.print("Date of birth? - ");
-                dobString = sc.nextLine();
-                try {
-                    this.dob = sdf.parse(dobString);
-                } catch (ParseException ex) {
-                    this.dob = null;
-                }
             }
         }
     }

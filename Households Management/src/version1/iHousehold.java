@@ -4,5 +4,7 @@ public interface iHousehold {
 
     void input();
 
+    void show();
+
     void find();
 }

@@ -1,9 +1,10 @@
 package version1;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-public class Household implements iHousehold {
+public class Household implements iHousehold, Serializable {
 
     private final int N_MEMBERS;
     private final String HOUSE_NUMBER;
@@ -11,8 +12,8 @@ public class Household implements iHousehold {
 
     public Household(String houseNumber, List<Member> lsMembers) {
         this.HOUSE_NUMBER = houseNumber;
-        this.N_MEMBERS = lsMembers.size();
         this.lsMembers = lsMembers;
+        this.N_MEMBERS = lsMembers.size();
     }
 
     public int getN_MEMBERS() {
@@ -33,13 +34,19 @@ public class Household implements iHousehold {
 
     @Override
     public String toString() {
-        return "Household{" + "N_MEMBERS=" + N_MEMBERS + ", houseNumber=" + HOUSE_NUMBER + '}';
+        return "Household{" + "Number of members is " + N_MEMBERS
+                + ", House Number (ID) is " + HOUSE_NUMBER + '}';
     }
 
     @Override
     public void input() {
         System.out.print("Number of members? - ");
-        int n = new Scanner(System.in).nextInt();
+        int n = 0;
+        try {
+            n = Integer.parseInt(new Scanner(System.in).nextLine());
+        } catch (NumberFormatException e) {
+            System.err.println(e.getMessage());
+        }
         for (int i = 0; i < n; i++) {
             Member ob = new Member();
             ob.inputInfo();
@@ -54,5 +61,11 @@ public class Household implements iHousehold {
                 System.out.println(Household.this.toString());
             }
         });
+    }
+
+    @Override
+    public void show() {
+        System.out.println(this);
+        lsMembers.forEach(Member::displayInfo);
     }
 }

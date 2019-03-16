@@ -32,6 +32,7 @@ public class StudentDao {
         } catch (IOException e) {
         } finally {
             closeStream(oos);
+            closeStream(fos);
         }
     }
 
@@ -51,8 +52,8 @@ public class StudentDao {
         } catch (FileNotFoundException e) {
         } catch (IOException | ClassNotFoundException e) {
         } finally {
-            closeStream(fis);
             closeStream(ois);
+            closeStream(fis);
         }
         return studentList;
     }

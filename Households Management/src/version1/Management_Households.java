@@ -5,16 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class Management_Households implements iManagement_Household {
 
     private HashMap<String, Household> lsHouseholds;
 
     public Management_Households() {
-    }
-
-    public Management_Households(HashMap<String, Household> lsHouseholds) {
-        this.lsHouseholds = lsHouseholds;
+        lsHouseholds = new HouseholdDAO().read();
     }
 
     public HashMap<String, Household> getLsHouseholds() {
@@ -35,6 +33,7 @@ public class Management_Households implements iManagement_Household {
         Household h = new Household(ID, new ArrayList<>());
         h.input();
         lsHouseholds.put(ID, h);
+        new HouseholdDAO().write(lsHouseholds);
     }
 
     @Override
@@ -44,6 +43,7 @@ public class Management_Households implements iManagement_Household {
         } else {
             System.out.println("Key's not valid");
         }
+        new HouseholdDAO().write(lsHouseholds);
     }
 
     @Override
@@ -64,8 +64,8 @@ public class Management_Households implements iManagement_Household {
     public void showInforamation() {
         if (!lsHouseholds.isEmpty() || lsHouseholds != null) {
             Set<Map.Entry<String, Household>> entrySet = lsHouseholds.entrySet();
-            entrySet.stream().forEach((t) -> {
-                System.out.println(t.getValue());
+            entrySet.stream().forEach((Map.Entry<String, Household> t) -> {
+                t.getValue().show();
             });
         } else {
 
