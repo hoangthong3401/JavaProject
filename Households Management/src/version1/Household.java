@@ -6,18 +6,16 @@ import java.util.Scanner;
 
 public class Household implements iHousehold, Serializable {
 
-    private final int N_MEMBERS;
     private final String HOUSE_NUMBER;
     private List<Member> lsMembers;
 
     public Household(String houseNumber, List<Member> lsMembers) {
         this.HOUSE_NUMBER = houseNumber;
         this.lsMembers = lsMembers;
-        this.N_MEMBERS = lsMembers.size();
     }
 
-    public int getN_MEMBERS() {
-        return N_MEMBERS;
+    public int getNumberOfMembers() {
+        return lsMembers.size();
     }
 
     public String getHouseNumber() {
@@ -34,7 +32,7 @@ public class Household implements iHousehold, Serializable {
 
     @Override
     public String toString() {
-        return "Household{" + "Number of members is " + N_MEMBERS
+        return "Household{" + "Number of members is " + getNumberOfMembers()
                 + ", House Number (ID) is " + HOUSE_NUMBER + '}';
     }
 
@@ -59,6 +57,7 @@ public class Household implements iHousehold, Serializable {
         lsMembers.stream().forEach((Member t) -> {
             if (t.isMoreThan80YearOld()) {
                 System.out.println(Household.this.toString());
+                System.out.println(t);
             }
         });
     }

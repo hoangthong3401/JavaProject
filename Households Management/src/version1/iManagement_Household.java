@@ -8,6 +8,8 @@ public interface iManagement_Household {
 
     void modify();
 
+    void find();
+
     void showInforamation();
 
     String generation(); //random string generation

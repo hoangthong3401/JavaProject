@@ -84,7 +84,7 @@ public class Member implements iMember, Serializable {
 
     @Override
     public void displayInfo() {
-        this.toString();
+        System.out.println(this);
     }
 
     @Override

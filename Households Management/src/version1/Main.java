@@ -33,10 +33,9 @@ public class Main {
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-    static {
-        new HouseholdDAO().write(new HashMap<>());
-    }
-
+//    static {
+//        new HouseholdDAO().write(new HashMap<>());
+//    }
     public static void main(String[] args) {
 
         printMenu();
@@ -55,6 +54,9 @@ public class Main {
                     System.out.print("key? - ");
                     manage.remove(new Scanner(System.in).nextLine());
                     break;
+                case "find":
+                    manage.find();
+                    break;
                 case "exit":
                     System.exit(0);
                 default:
@@ -69,6 +71,9 @@ public class Main {
         System.out.println(ANSI_RED + "show" + ANSI_RESET + " show list all the households.");
         System.out.println(ANSI_RED + "add" + ANSI_RESET + " add the households.");
         System.out.println(ANSI_RED + "remove" + ANSI_RESET + " the household by key");
+        System.out.println(ANSI_RED + "find" + ANSI_RESET + " Displaying a screen "
+                + "of information about households in the neighborhood this year, "
+                + "there are people celebrating life expectancy (80 years).");
         System.out.println(ANSI_RED + "exit" + ANSI_RESET + " exit the program.");
     }
 }

@@ -72,4 +72,12 @@ public class Management_Households implements iManagement_Household {
         }
     }
 
+    @Override
+    public void find() {
+        Set<Map.Entry<String, Household>> entrySet = lsHouseholds.entrySet();
+        entrySet.forEach((Map.Entry<String, Household> t) -> {
+            t.getValue().find();
+        });
+    }
+
 }
