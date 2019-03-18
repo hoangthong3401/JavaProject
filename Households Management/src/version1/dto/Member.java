@@ -1,4 +1,4 @@
-package version1;
+package version1.dto;
 
 import java.io.Serializable;
 import java.text.ParseException;

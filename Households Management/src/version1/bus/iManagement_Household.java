@@ -1,4 +1,4 @@
-package version1;
+package version1.bus;
 
 public interface iManagement_Household {
 

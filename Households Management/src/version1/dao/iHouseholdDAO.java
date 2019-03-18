@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package version1;
+package version1.dao;
 
+import version1.dto.Household;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;

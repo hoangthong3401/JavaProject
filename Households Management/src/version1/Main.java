@@ -1,6 +1,6 @@
 package version1;
 
-import java.util.HashMap;
+import version1.bus.Management_Households;
 import java.util.Scanner;
 
 
@@ -8,9 +8,9 @@ import java.util.Scanner;
 @author Unify Williams (Jing Tian)
     version 1.0 : console program
     -   Not using Database
-    -   Not using MVC
     -   Not having GUI
-    -   Not using 3 - Layer
+    -   Using collections API, dont't use array.
+    -   Using 3 - Layer
     -   Using local file (FileInputStream and FileOutputStream).
  */
 public class Main {

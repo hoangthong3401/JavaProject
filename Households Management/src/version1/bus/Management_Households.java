@@ -1,11 +1,12 @@
-package version1;
+package version1.bus;
 
+import version1.dto.Household;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Consumer;
+import version1.dao.HouseholdDAO;
 
 public class Management_Households implements iManagement_Household {
 
